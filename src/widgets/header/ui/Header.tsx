@@ -15,7 +15,7 @@ export function Header() {
         className="gap-2 rounded-full bg-white/10 px-4 text-white backdrop-blur-md hover:bg-white/20 hover:text-white"
       >
         <MapPin className="h-4 w-4" />
-        <span className="hidden sm:inline">Current Location</span>
+        <span className="hidden sm:inline">현재 위치</span>
       </Button>
     </header>
   );
