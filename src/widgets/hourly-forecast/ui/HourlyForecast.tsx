@@ -3,11 +3,10 @@
 import { Sun, Cloud, CloudSun, Moon, CloudMoon } from "lucide-react";
 import { Card } from "@/shared/ui/card";
 import { ScrollArea, ScrollBar } from "@/shared/ui/scroll-area";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 
 export function HourlyForecast() {
-  const currentTime = format(new Date(), "HH");
-  console.log("currentTime : ", currentTime);
+  // const currentTime = format(new Date(), "HH");
 
   const hourlyData = [
     { time: "Now", temp: 0, icon: Sun },
@@ -23,13 +22,6 @@ export function HourlyForecast() {
     { time: "10 PM", temp: -2, icon: Moon },
     { time: "11 PM", temp: -3, icon: Moon },
   ];
-
-  const filteredHourlyData = hourlyData.filter((hour) => {
-    const hourNumber = Number.parseInt(hour.time.split(" ")[0]);
-    return hourNumber >= Number(currentTime);
-  });
-
-  console.log("filteredHourlyData : ", filteredHourlyData);
 
   return (
     <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">

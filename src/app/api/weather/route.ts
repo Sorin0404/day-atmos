@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
             Authorization: `KakaoAK ${kakaoApiKey}`,
           },
           next: {
-            revalidate: 3600, // 주소는 1시간 캐시
+            revalidate: 60,
           },
         }
       ),
@@ -61,7 +61,9 @@ export async function GET(request: NextRequest) {
     if (!weatherResponse.ok) {
       const errorText = await weatherResponse.text();
       return NextResponse.json(
-        { error: `Weather API error: ${weatherResponse.status} - ${errorText}` },
+        {
+          error: `Weather API error: ${weatherResponse.status} - ${errorText}`,
+        },
         { status: weatherResponse.status }
       );
     }
@@ -71,7 +73,6 @@ export async function GET(request: NextRequest) {
     // Kakao API에서 한국 주소 추출
     if (kakaoResponse.ok) {
       const kakaoData = await kakaoResponse.json();
-      console.log("✅ Kakao API Response:", JSON.stringify(kakaoData, null, 2));
 
       if (kakaoData.documents && kakaoData.documents.length > 0) {
         const address = kakaoData.documents[0].address;
@@ -82,9 +83,8 @@ export async function GET(request: NextRequest) {
             region2: address.region_2depth_name,
             region3: address.region_3depth_name,
           };
-          // name도 한국 주소로 업데이트
+          // name을 한국 주소로 업데이트
           weatherData.name = weatherData.koreanAddress.full;
-          console.log("✅ Korean Address Set:", weatherData.koreanAddress);
         }
       }
     } else {
