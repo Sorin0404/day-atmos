@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Day-Atmos - Weather App",
   description: "Real-time weather forecasts",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

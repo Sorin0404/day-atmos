@@ -1,14 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchWeather } from './weatherApi'
+import { useQuery } from "@tanstack/react-query";
+import { fetchWeather } from "./weatherApi";
 
 export const weatherKeys = {
-  all: ['weather'] as const,
-  detail: (city: string) => [...weatherKeys.all, city] as const,
-}
+  all: ["weather"] as const,
+  detail: (lat: number, lon: number) => [...weatherKeys.all, lat, lon] as const,
+};
 
-export function useWeatherQuery(city: string) {
+export function useWeatherQuery(lat: number, lon: number) {
   return useQuery({
-    queryKey: weatherKeys.detail(city),
-    queryFn: () => fetchWeather(city),
-  })
+    queryKey: weatherKeys.detail(lat, lon),
+    queryFn: () => fetchWeather(lat, lon),
+  });
 }
