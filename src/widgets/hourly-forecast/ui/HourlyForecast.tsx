@@ -3,23 +3,34 @@
 import { Sun, Cloud, CloudSun, Moon, CloudMoon } from "lucide-react";
 import { Card } from "@/shared/ui/card";
 import { ScrollArea, ScrollBar } from "@/shared/ui/scroll-area";
-
-const hourlyData = [
-  { time: "Now", temp: 0, icon: Sun },
-  { time: "1 PM", temp: 1, icon: Sun },
-  { time: "2 PM", temp: 2, icon: Sun },
-  { time: "3 PM", temp: 2, icon: CloudSun },
-  { time: "4 PM", temp: 3, icon: CloudSun },
-  { time: "5 PM", temp: 3, icon: Cloud },
-  { time: "6 PM", temp: 2, icon: CloudSun },
-  { time: "7 PM", temp: 1, icon: CloudMoon },
-  { time: "8 PM", temp: 0, icon: Moon },
-  { time: "9 PM", temp: -1, icon: Moon },
-  { time: "10 PM", temp: -2, icon: Moon },
-  { time: "11 PM", temp: -3, icon: Moon },
-];
+import { format } from "date-fns";
 
 export function HourlyForecast() {
+  const currentTime = format(new Date(), "HH");
+  console.log("currentTime : ", currentTime);
+
+  const hourlyData = [
+    { time: "Now", temp: 0, icon: Sun },
+    { time: "1 PM", temp: 1, icon: Sun },
+    { time: "2 PM", temp: 2, icon: Sun },
+    { time: "3 PM", temp: 2, icon: CloudSun },
+    { time: "4 PM", temp: 3, icon: CloudSun },
+    { time: "5 PM", temp: 3, icon: Cloud },
+    { time: "6 PM", temp: 2, icon: CloudSun },
+    { time: "7 PM", temp: 1, icon: CloudMoon },
+    { time: "8 PM", temp: 0, icon: Moon },
+    { time: "9 PM", temp: -1, icon: Moon },
+    { time: "10 PM", temp: -2, icon: Moon },
+    { time: "11 PM", temp: -3, icon: Moon },
+  ];
+
+  const filteredHourlyData = hourlyData.filter((hour) => {
+    const hourNumber = Number.parseInt(hour.time.split(" ")[0]);
+    return hourNumber >= Number(currentTime);
+  });
+
+  console.log("filteredHourlyData : ", filteredHourlyData);
+
   return (
     <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">
       <h3 className="mb-4 text-lg font-semibold text-white">시간별 예보</h3>

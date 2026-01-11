@@ -17,6 +17,7 @@ export async function fetchWeather(lat: number, lon: number): Promise<Weather> {
     }
 
     const data: Weather = await response.json();
+
     return data;
   } catch (error) {
     if (error instanceof Error) {

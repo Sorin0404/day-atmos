@@ -1,7 +1,33 @@
+"use client";
+
 import { Cloud, MapPin } from "lucide-react";
 import { Button } from "@/shared/ui/button";
+import { useEffect } from "react";
+import { useLocationStore } from "@/shared/store";
 
 export function Header() {
+  const { setLocation } = useLocationStore();
+
+  useEffect(() => {
+    const handleSuccess = (pos: GeolocationPosition) => {
+      const { latitude, longitude } = pos.coords;
+      setLocation(latitude, longitude);
+    };
+
+    const handleError = (err: GeolocationPositionError) => {
+      console.error("Geolocation error:", err.message);
+    };
+
+    const { geolocation } = navigator;
+
+    if (!geolocation) {
+      console.error("Geolocation is not supported.");
+      return;
+    }
+
+    geolocation.getCurrentPosition(handleSuccess, handleError);
+  }, [setLocation]);
+
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center gap-2">
