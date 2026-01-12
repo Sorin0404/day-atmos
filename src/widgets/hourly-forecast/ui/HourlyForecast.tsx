@@ -3,6 +3,7 @@
 import { Sun, Cloud, CloudSun, Moon, CloudMoon } from "lucide-react";
 import { Card } from "@/shared/ui/card";
 import { ScrollArea, ScrollBar } from "@/shared/ui/scroll-area";
+import { cn } from "@/shared/lib/utils";
 // import { format } from "date-fns";
 
 export function HourlyForecast() {
@@ -33,9 +34,13 @@ export function HourlyForecast() {
             return (
               <div
                 key={hour.time}
-                className={`flex min-w-[70px] flex-col items-center rounded-2xl p-3 transition-all ${
-                  index === 0 ? "bg-white/20" : "bg-white/5 hover:bg-white/10"
-                }`}
+                className={cn(
+                  "flex min-w-[70px] flex-col items-center rounded-2xl p-3 transition-all",
+                  {
+                    "bg-white/20": index === 0,
+                    "bg-white/5 hover:bg-white/10": index !== 0,
+                  }
+                )}
               >
                 <span className="text-sm text-white/70">{hour.time}</span>
                 <Icon className="my-2 h-6 w-6 text-white" />
