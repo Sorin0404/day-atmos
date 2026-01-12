@@ -23,7 +23,13 @@ export function SearchLocation() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const { setLocation } = useLocationStore();
+
+  // 클라이언트 마운트 체크
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // korea_districts.json 로드
   useEffect(() => {
@@ -65,6 +71,19 @@ export function SearchLocation() {
       setIsLoading(false);
     }
   };
+
+  // 서버 사이드 렌더링 시 플레이스홀더 표시
+  if (!isMounted) {
+    return (
+      <div className="relative w-full">
+        <div className="rounded-2xl border-0 bg-white/10 backdrop-blur-md p-3">
+          <div className="h-10 flex items-center text-white/50 text-sm px-3">
+            지역을 검색하세요 (예: 서울특별시, 종로구, 청운동)
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full">
