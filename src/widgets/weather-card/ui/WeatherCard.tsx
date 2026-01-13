@@ -91,7 +91,10 @@ export function WeatherCard({ displayName }: WeatherCardProps = {}) {
 
             <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left">
               <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br from-yellow-300 to-orange-400 shadow-lg shadow-orange-500/30 sm:mb-0 sm:mr-6">
-                {getWeatherIcon(weather?.weather[0]?.icon, "h-14 w-14 text-white")}
+                {getWeatherIcon(
+                  weather?.weather[0]?.icon,
+                  "h-14 w-14 text-white"
+                )}
               </div>
               <div className="flex-1">
                 <div className="mb-1">
@@ -173,6 +176,7 @@ export function WeatherCard({ displayName }: WeatherCardProps = {}) {
         }
         confirmLabel="확인"
         onConfirm={() => {}}
+        showCancel={false}
       />
     </>
   );
