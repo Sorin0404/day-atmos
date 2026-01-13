@@ -23,7 +23,7 @@ export function HourlyForecast() {
     return (
       <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">
         <h3 className="mb-4 text-lg font-semibold text-white">
-          시간별 예보 (3시간 간격)
+          향후 24시간 예보 (3시간 간격)
         </h3>
         <div className="flex gap-3">
           {Array.from({ length: 8 }, (_, i) => `skeleton-${i}`).map((key) => (
@@ -42,7 +42,7 @@ export function HourlyForecast() {
     return (
       <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">
         <h3 className="mb-4 text-lg font-semibold text-white">
-          시간별 예보 (3시간 간격)
+          향후 24시간 예보 (3시간 간격)
         </h3>
         <p className="text-sm text-white/70">
           예보 데이터를 불러올 수 없습니다.
@@ -55,7 +55,7 @@ export function HourlyForecast() {
     return (
       <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">
         <h3 className="mb-4 text-lg font-semibold text-white">
-          시간별 예보 (3시간 간격)
+          향후 24시간 예보 (3시간 간격)
         </h3>
         <p className="text-sm text-white/70">예보 데이터가 없습니다.</p>
       </Card>
@@ -88,7 +88,7 @@ export function HourlyForecast() {
   return (
     <Card className="rounded-3xl border-0 bg-white/10 p-6 backdrop-blur-md">
       <h3 className="mb-4 text-lg font-semibold text-white">
-        시간별 예보 (3시간 간격)
+        향후 24시간 예보 (3시간 간격)
       </h3>
       <ScrollArea className="w-full">
         <div className="flex gap-3 pb-2">
