@@ -65,14 +65,20 @@ export function InputDialog({
           )}
         </DialogHeader>
         <div className="space-y-4">
-          <Input
-            value={value}
-            onChange={(e) => onValueChange(e.target.value)}
-            placeholder={placeholder}
-            onKeyDown={handleKeyDown}
-            autoFocus
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-blue-500"
-          />
+          <div>
+            <Input
+              value={value}
+              onChange={(e) => onValueChange(e.target.value)}
+              placeholder={placeholder}
+              onKeyDown={handleKeyDown}
+              maxLength={20}
+              autoFocus
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-blue-500"
+            />
+            <p className="mt-1 text-xs text-white/50 text-right">
+              {value.length}/20자
+            </p>
+          </div>
           <div className="flex justify-end gap-2">
             <Button
               variant="outline"

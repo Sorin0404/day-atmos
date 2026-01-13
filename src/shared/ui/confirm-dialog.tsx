@@ -23,6 +23,7 @@ interface ConfirmDialogProps {
     | "link";
   onConfirm: () => void;
   onCancel?: () => void;
+  showCancel?: boolean;
 }
 
 export function ConfirmDialog({
@@ -35,6 +36,7 @@ export function ConfirmDialog({
   confirmVariant = "default",
   onConfirm,
   onCancel,
+  showCancel = true,
 }: ConfirmDialogProps) {
   const handleCancel = () => {
     onOpenChange(false);
@@ -56,13 +58,15 @@ export function ConfirmDialog({
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end gap-2">
-          <Button
-            variant="outline"
-            onClick={handleCancel}
-            className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
-          >
-            {cancelLabel}
-          </Button>
+          {showCancel && (
+            <Button
+              variant="outline"
+              onClick={handleCancel}
+              className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            >
+              {cancelLabel}
+            </Button>
+          )}
           <Button
             variant={confirmVariant}
             onClick={handleConfirm}

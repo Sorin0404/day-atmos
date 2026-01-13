@@ -16,6 +16,7 @@ interface FavoriteStore {
   addFavorite: (location: Omit<FavoriteLocation, "id" | "addedAt">) => boolean;
   removeFavorite: (id: string) => void;
   updateFavoriteName: (id: string, newName: string) => void;
+  reorderFavorites: (newOrder: FavoriteLocation[]) => void;
   isFavorite: (lat: number, lon: number) => boolean;
   getFavoriteByCoords: (
     lat: number,
@@ -69,6 +70,10 @@ export const useFavoriteStore = create<FavoriteStore>()(
             fav.id === id ? { ...fav, name: newName } : fav
           ),
         }));
+      },
+
+      reorderFavorites: (newOrder) => {
+        set({ favorites: newOrder });
       },
 
       isFavorite: (lat, lon) => {
