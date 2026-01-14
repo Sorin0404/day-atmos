@@ -25,6 +25,33 @@ export function WeatherCard({ displayName }: WeatherCardProps = {}) {
 
   const { data: weather, isLoading } = useWeatherQuery(lat, lon);
 
+  // 날씨 아이콘 배경 그라데이션 결정
+  const getIconBackground = (iconCode?: string) => {
+    if (!iconCode) return "from-yellow-300 to-orange-400"; // 기본값 (낮)
+
+    // 밤 아이콘인지 확인 (OpenWeatherMap 아이콘 코드가 'n'으로 끝남)
+    const isNight = iconCode.endsWith("n");
+
+    if (isNight) {
+      return "from-indigo-400 to-purple-600 shadow-indigo-500/30"; // 밤 그라데이션
+    }
+
+    // 날씨 상태에 따른 미세 조정 (선택사항)
+    // 비/눈/구름 등의 상태에 따라 회색조 등을 섞을 수도 있음
+    if (
+      iconCode.startsWith("09") ||
+      iconCode.startsWith("10") ||
+      iconCode.startsWith("11")
+    ) {
+      // 비/뇌우
+      return "from-blue-400 to-slate-500 shadow-blue-500/30";
+    }
+
+    return "from-yellow-300 to-orange-400 shadow-orange-500/30"; // 맑은 낮
+  };
+
+  const iconBackgroundClass = getIconBackground(weather?.weather[0]?.icon);
+
   const handleAddFavorite = () => {
     if (!weather) return;
 
@@ -90,7 +117,12 @@ export function WeatherCard({ displayName }: WeatherCardProps = {}) {
             </Button>
 
             <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left">
-              <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br from-yellow-300 to-orange-400 shadow-lg shadow-orange-500/30 sm:mb-0 sm:mr-6">
+              <div
+                className={cn(
+                  "mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-linear-to-br shadow-lg sm:mb-0 sm:mr-6",
+                  iconBackgroundClass
+                )}
+              >
                 {getWeatherIcon(
                   weather?.weather[0]?.icon,
                   "h-14 w-14 text-white"
