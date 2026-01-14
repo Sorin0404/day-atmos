@@ -2,7 +2,7 @@
 
 > 리얼티쓰 프론트엔드 채용 과제 - 날씨 앱
 
-사용자의 현재 위치를 감지하여 날씨 정보를 제공하고, 원하는 지역을 검색하여 즐겨찾기에 추가할 수 있는 날씨 애플리케이션입니다.
+사용자의 현재 위치를 감지하여 날씨 정보를 제공하고 원하는 지역을 검색하여 즐겨찾기에 추가할 수 있는 날씨 애플리케이션입니다.
 
 <br />
 
@@ -10,7 +10,7 @@
 
 ### 1. 환경 변수 설정
 
-프로젝트 루트 디렉토리에 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요:
+프로젝트 루트 디렉토리에 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요.
 
 ```bash
 # OpenWeatherMap API Key
@@ -89,26 +89,23 @@ pnpm start
 ### 1. **Next.js 16 (App Router)**
 
 - **선택 이유**:
-  - React만으로는 라우팅, API 엔드포인트 구성이 복잡하므로 프레임워크가 필요했습니다.
-  - App Router는 React 19와 완벽히 호환되며 Server Components를 활용할 수 있습니다.
-  - API Routes(`/api/weather`, `/api/forecast`)로 백엔드 없이 프록시 서버를 구현했습니다.
+  - API Key 보안: API Routes로 서버 사이드에서 API를 호출하여 OpenWeatherMap, Kakao API 키를 클라이언트에 노출하지 않습니다.
   - 동적 라우팅(`/detail/[lat]/[lon]`)으로 상세 페이지를 간결하게 구현할 수 있었습니다.
 
 ### 2. **Zustand (클라이언트 상태 관리)**
 
 - **선택 이유**:
   - 위치 정보와 즐겨찾기는 클라이언트에서만 관리하면 되므로 가벼운 상태 관리 라이브러리가 필요했습니다.
-  - Redux는 보일러플레이트가 많고, Context API는 리렌더링 최적화가 어려웠습니다.
+  - Redux는 보일러플레이트가 많고 Context API는 리렌더링 최적화가 어려웠습니다.
   - Zustand는 코드가 간결하면서도 `persist` 미들웨어로 LocalStorage 연동이 쉽습니다.
   - TanStack Query(서버 상태)와 Zustand(클라이언트 상태)를 명확히 분리하여 관리할 수 있었습니다.
 
 ### 3. **shadcn/ui**
 
 - **선택 이유**:
-  - Radix UI 기반으로 접근성(a11y)이 뛰어나고, 키보드 네비게이션을 완벽하게 지원합니다.
+  - Radix UI 기반으로 접근성(a11y)이 뛰어나고 키보드 네비게이션을 완벽하게 지원합니다.
   - 컴포넌트를 복사하여 프로젝트에 직접 추가하는 방식이라 커스터마이징이 자유롭습니다.
   - Tailwind CSS와 완벽히 통합되어 일관된 디자인 시스템을 유지할 수 있습니다.
-  - Dialog, Command, ScrollArea 등 날씨 앱에 필요한 고품질 컴포넌트를 빠르게 구성했습니다.
 
 ### 4. **@dnd-kit (드래그앤드롭)**
 
@@ -116,7 +113,7 @@ pnpm start
 
   - 즐겨찾기 순서 변경 기능을 추가하여 사용자 경험을 개선하고자 했습니다.
 
-  - `@dnd-kit`은 터치/마우스/키보드를 모두 지원하며, 수평 스크롤 영역에서도 안정적으로 작동합니다.
+  - `@dnd-kit`은 터치/마우스/키보드를 모두 지원하며 수평 스크롤 영역에서도 안정적으로 작동합니다.
   - `activationConstraint`로 클릭과 드래그를 명확히 구분하여 오작동을 방지했습니다.
 
 ### 5. **OpenWeatherMap API**
@@ -130,9 +127,8 @@ pnpm start
 ### 6. **Kakao Geocoding API**
 
 - **선택 이유**:
-  - 한국 주소 체계에 특화되어 있어 "서울특별시 종로구"와 같은 행정구역 검색 정확도가 매우 높습니다.
+  - 한국 주소 체계에 특화되어 있어 행정구역 검색 정확도가 높습니다.
   - OpenWeatherMap의 Geocoding API는 영문 주소 위주라 한글 검색 시 정확도가 떨어집니다.
-  - REST API로 간단히 통합할 수 있고, 무료 할당량이 충분합니다.
 
 ### 7. **date-fns**
 
@@ -157,7 +153,6 @@ pnpm start
 - **Next.js 16.1** - React 프레임워크 (App Router, API Routes)
 - **Zustand 5.0** - 클라이언트 상태 관리 (위치, 즐겨찾기)
 - **shadcn/ui** - Radix UI 기반 UI 컴포넌트 시스템
-  - Dialog, Command, ScrollArea 등
 - **@dnd-kit** - 접근성 높은 드래그앤드롭 라이브러리
 - **Lucide React** - 아이콘 라이브러리
 - **date-fns** - 날짜/시간 포맷팅
@@ -209,6 +204,8 @@ src/
 ## 🎨 주요 기능 스크린샷
 
 ### 메인 페이지
+<img width="720" height="347" alt="main-desktop" src="https://github.com/user-attachments/assets/ecd60db3-20a3-43f7-8512-f59181b0b164" />
+<img width="320" height="1002" alt="main-mobile" src="https://github.com/user-attachments/assets/62643570-f672-4528-9309-5efc5dacd404" />
 
 - 현재 날씨 정보 표시
 - 즐겨찾기 보드 (최대 6개)
@@ -216,11 +213,16 @@ src/
 
 ### 상세 페이지
 
+<img width="720" height="347" alt="detail-dektop" src="https://github.com/user-attachments/assets/348802ce-a88d-458c-9ca6-82a4e4080980" />
+<img width="320" height="693" alt="detail-mobile" src="https://github.com/user-attachments/assets/39956f76-6ec5-4600-9e42-30593c4b324b" />
+
 - 즐겨찾기 카드 클릭 시 해당 지역의 상세 날씨 정보
 - 별칭과 실제 지역명 동시 표시
 - 시간대별 예보 포함
 
 ### 즐겨찾기 편집 모드
+![dnd-kit](https://github.com/user-attachments/assets/5224bce0-50f1-4f23-a947-3d2788d5046f)
+![favorites-editing deletion](https://github.com/user-attachments/assets/7aa382cf-0de7-46f3-afb0-c2381f6927bb)
 
 - 드래그앤드롭으로 순서 변경
 - 이름 수정 및 삭제 기능
